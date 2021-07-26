@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package user_management;
+option go_package="src/api/";
+
+// The service that provides user manipulation
+service UserManagement {
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+    rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
+    rpc GetUser (GetUserRequest) returns (GetUserResponse);
+    rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+    rpc ListUsers (ListUsersRequest) returns (stream ListUsersResponse);
+}
+
+message User {
+    string id = 1;
+    string password = 2;
+    string firstName = 3;
+    string lastName = 4;
+    string email = 5;
+    string phone = 6;
+    Gender gender = 7;
+    string birthday = 8;  
+}
+
+enum Gender {
+    CUSTOM = 0;
+    FEMALE = 1;
+    MALE = 3;
+}
+
+message CreateUserRequest {
+    User user = 1;
+}
+
+message CreateUserResponse {
+    User user = 1;
+}
+
+message UpdateUserRequest {
+    User user = 1;
+}
+
+message UpdateUserResponse {
+    User user = 1;
+}
+
+message GetUserRequest {
+    string user_id = 1;
+}
+
+message GetUserResponse {
+    User user = 1;
+}
+
+message DeleteUserRequest {
+    string user_id = 1;
+}
+
+message DeleteUserResponse {
+    string user_id = 1;
+}
+
+message ListUsersRequest {}
+
+message ListUsersResponse {
+    User user = 1;
+}
